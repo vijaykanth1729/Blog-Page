@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+
+    <div class="row">
+
+        <!-- Blog Entries Column -->
+        <div class="col-md-8">
+
+
+            <h1 class="my-4">Blog Page!
+            </h1>
+            {% for data in object %}
+            <!-- Blog Post -->
+            <div class="card mb-4">
+
+                <div class="card-body">
+                    <h2 class="card-title">{{data.title}}</h2>
+                    <p class="card-text">{{data.get_body}}</p>
+                    <a href="{% url 'myapp:detail' data.pk %}" class="btn btn-info">Read More &rarr;</a>
+                </div>
+                <div class="card-footer text-muted">
+                    Posted on {{data.date}} by
+                    <a href="#">{{data.author}}</a>
+                </div>
+            </div>
+            {% endfor %}
+
+            {% if is_paginated %}
+            <!-- Pagination -->
+            <ul class="pagination justify-content-center mb-4">
+                {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}">&larr; Previous Page</a>
+                </li>
+                {% endif %}
+                {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.next_page_number}}">Next Page &rarr;</a>
+                </li>
+                {% endif %}
+            </ul>
+            {% endif %}
+
+        </div>
+
+        <!-- Sidebar Widgets Column -->
+
+        <div class="col-md-4">
+
+            <!-- Search Widget -->
+            <div class="card my-4">
+                <h5 class="card-header">Search</h5>
+                <div class="card-body">
+                    <div class="input-group">
+
+                        <input type="text" name="q" class="form-control" placeholder="Search for...">
+                        <span class="input-group-btn">
+                <button  class="btn btn-secondary" type="submit">Go!</button>
+
+              </span>
+
+                    </div>
+                </div>
+            </div>
+            <!-- Categories Widget -->
+            <div class="card my-4">
+                <h5 class="card-header">Categories</h5>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <ul class="list-unstyled mb-0">
+                                <li>
+                                    <a href="#">Web Design</a>
+                                </li>
+                                <li>
+                                    <a href="#">HTML</a>
+                                </li>
+                                <li>
+                                    <a href="#">Freebies</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-6">
+                            <ul class="list-unstyled mb-0">
+                                <li>
+                                    <a href="#">JavaScript</a>
+                                </li>
+                                <li>
+                                    <a href="#">CSS</a>
+                                </li>
+                                <li>
+                                    <a href="#">Tutorials</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Side Widget -->
+            <div class="card my-4">
+                <h5 class="card-header">Side Widget</h5>
+                <div class="card-body">
+                  <strong> UserName: {{ user.username}} </strong> <br/>
+                    <strong>Email: {{ user.email }}</strong>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <!-- /.row -->
+
+</div>
+<!-- /.container -->
+
+
+{% endblock %}

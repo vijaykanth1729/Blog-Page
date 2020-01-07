@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container">
+
+    <div class="row">
+
+        <!-- Blog Entries Column -->
+        <div class="col-md-8">
+            <h1 class="my-4">Blog Page!
+            </h1>
+            <div class="card mb-4">
+
+                <div class="card-header">
+                    <h3 class="text-center">Create Account</h3>
+
+                </div>
+                <div class="card-body">
+                    <form method = "post">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        <button type="submit" class="btn btn-primary">Register</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
